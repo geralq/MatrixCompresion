@@ -12,11 +12,11 @@ import java.util.List;
 
 public class CooMatrixBuilder implements MatrixBuilder {
     public final String filePath;
-    private final List<Coordinate> coordinates;
+    private final List<Coordinate> coordinates = new ArrayList<>();
 
-    public CooMatrixBuilder(String filePath) throws IOException {
+
+    public CooMatrixBuilder(String filePath){
         this.filePath = filePath;
-        this.coordinates = new ArrayList<>();
         compress();
     }
 
@@ -26,13 +26,41 @@ public class CooMatrixBuilder implements MatrixBuilder {
 
     @Override
     public void compress() {
-        BufferedReader reader = null;
+        BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(filePath));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
 
+        avoidMetadata(reader);
+        String line;
+
+        while (true) {
+            try {
+                if ((line = reader.readLine()) == null) break;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            String[] parts = line.trim().split("\\s+");
+            if (parts.length >= 3) {
+                int row = Integer.parseInt(parts[0]);
+                int col = Integer.parseInt(parts[1]);
+                if (Double.parseDouble(parts[2]) != 0){
+                    double value = Double.parseDouble(parts[2]);
+                    coordinates.add(new Coordinate(row,col,value));
+                }
+            }
+        }
+
+        try {
+            reader.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void avoidMetadata(BufferedReader reader) {
         String line;
 
         while (true) {
@@ -47,32 +75,8 @@ public class CooMatrixBuilder implements MatrixBuilder {
 
             String[] parts = line.trim().split("\\s+");
             if (parts.length >= 2) {
-                int numRows = Integer.parseInt(parts[0]);
-                int numCols = Integer.parseInt(parts[1]);
-
                 break;
             }
-        }
-
-        while (true) {
-            try {
-                if ((line = reader.readLine()) == null) break;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            String[] parts = line.trim().split("\\s+");
-            if (parts.length >= 3) {
-                int row = Integer.parseInt(parts[0]);
-                int col = Integer.parseInt(parts[1]);
-                double value = Double.parseDouble(parts[2]);
-                coordinates.add(new Coordinate(row,col,value));
-            }
-        }
-
-        try {
-            reader.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 }
