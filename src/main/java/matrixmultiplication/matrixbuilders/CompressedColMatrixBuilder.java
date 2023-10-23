@@ -33,7 +33,7 @@ public class CompressedColMatrixBuilder implements MatrixBuilder {
         List<Integer> colPtrList = new ArrayList<>();
 
         int count = 0;
-        int j = 0;
+        int j = coordinateMatrix.get(0).j();
         colPtrList.add(count);
         for (Coordinate coordinate : coordinateMatrix){
 
@@ -45,6 +45,7 @@ public class CompressedColMatrixBuilder implements MatrixBuilder {
             count++;
             valueList.add(coordinate.value());
         }
+        colPtrList.add(count);
 
         values = valueList;
         rows = rowList;

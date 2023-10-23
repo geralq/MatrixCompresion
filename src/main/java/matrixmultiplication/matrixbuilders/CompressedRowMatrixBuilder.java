@@ -33,11 +33,10 @@ public class CompressedRowMatrixBuilder implements MatrixBuilder {
         List<Integer> rowPtrList = new ArrayList<>();
 
         int count = 0;
-        int i = 0;
+        int i = coordinateList.get(0).i();
         rowPtrList.add(count);
         for (Coordinate coordinate : coordinateList){
             columnList.add(coordinate.j());
-
             if (i != coordinate.i()){
                 rowPtrList.add(count);
                 i++;
@@ -45,6 +44,7 @@ public class CompressedRowMatrixBuilder implements MatrixBuilder {
             count++;
             valueList.add(coordinate.value());
         }
+        rowPtrList.add(count);
 
         values = valueList;
         columns = columnList;

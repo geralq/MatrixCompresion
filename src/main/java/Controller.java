@@ -11,9 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Controller {
-
     private final String path = "C:\\Users\\gerar\\OneDrive\\Escritorio\\ULPGC\\BD\\1138_bus.mtx";
-
     private final CooMatrixBuilder cooMatrixBuilder = new CooMatrixBuilder(path);
     private final List<Coordinate> coordinateMatrix = cooMatrixBuilder.getCooMatrix();
     private final CompressedRowMatrixBuilder compressedRowMatrixBuilder = new CompressedRowMatrixBuilder(coordinateMatrix);
@@ -38,16 +36,16 @@ public class Controller {
             switch (format) {
                 case "CRS" -> {
                     CRS crs = matrixMultiplication.CRSMultiplication();
-                    System.out.println("RowPointer: " + crs.getRowPtr());
-                    System.out.println("Columns :" + crs.getColumns());
-                    System.out.println("Values :" + crs.getValues());
+                    System.out.println("RowPointer: " + crs.rowPtr());
+                    System.out.println("Columns :" + crs.columns());
+                    System.out.println("Values :" + crs.values());
                     System.out.println("If you are done with the matrix multiplication system, write 'exit' to finish the system");
                 }
                 case "CCS" -> {
                     CCS ccs = matrixMultiplication.CSSMultiplication();
-                    System.out.println("ColPointer: " + ccs.getColPtr());
-                    System.out.println("Rows :" + ccs.getRows());
-                    System.out.println("Values :" + ccs.getValues());
+                    System.out.println("ColPointer: " + ccs.colPtr());
+                    System.out.println("Rows :" + ccs.rows());
+                    System.out.println("Values :" + ccs.values());
                     System.out.println("If you are done with the matrix multiplication system, write 'exit' to finish the system");
                 }
                 case "exit" -> System.exit(0);

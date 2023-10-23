@@ -18,7 +18,6 @@ public class CooMatrixBuilder implements MatrixBuilder {
         this.filePath = filePath;
         this.coordinates = new ArrayList<>();
         compress();
-
     }
 
     public List<Coordinate> getCooMatrix() {
@@ -35,8 +34,6 @@ public class CooMatrixBuilder implements MatrixBuilder {
         }
 
         String line;
-        int numRows = 0;
-        int numCols = 0;
 
         while (true) {
             try {
@@ -50,8 +47,9 @@ public class CooMatrixBuilder implements MatrixBuilder {
 
             String[] parts = line.trim().split("\\s+");
             if (parts.length >= 2) {
-                numRows = Integer.parseInt(parts[0]);
-                numCols = Integer.parseInt(parts[1]);
+                int numRows = Integer.parseInt(parts[0]);
+                int numCols = Integer.parseInt(parts[1]);
+
                 break;
             }
         }
