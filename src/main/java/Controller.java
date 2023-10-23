@@ -17,7 +17,7 @@ public class Controller {
     private final List<Coordinate> coordinateMatrix = cooMatrixBuilder.getCooMatrix();
     private final CompressedRowMatrixBuilder compressedRowMatrixBuilder = new CompressedRowMatrixBuilder(coordinateMatrix);
     private final CompressedColMatrixBuilder compressedColMatrixBuilder = new CompressedColMatrixBuilder(coordinateMatrix);
-    public Controller() throws IOException {
+    public Controller() {
     }
 
     public void execute(){
@@ -35,20 +35,20 @@ public class Controller {
             switch (format) {
                 case "CRS" -> {
                     COO coo = matrixMultiplication.PrepareMultiplication(a,b);
-                    CompressedRowMatrixBuilder compressedRowMatrixBuilder = new CompressedRowMatrixBuilder(coo.coordinates);
+                    CompressedRowMatrixBuilder compressedRowMatrixBuilder = new CompressedRowMatrixBuilder(coo.getCoordinates());
                     CRS crs = compressedRowMatrixBuilder.getCRSMatrix();
-                    System.out.println("RowPointer: " + crs.rowPtr());
-                    System.out.println("Columns :" + crs.columns());
-                    System.out.println("Values :" + crs.values());
+                    System.out.println("RowPointer: " + crs.getRowPtr());
+                    System.out.println("Columns :" + crs.getColumns());
+                    System.out.println("Values :" + crs.getValues());
                     System.out.println("If you are done with the matrix multiplication system, write 'exit' to finish the system");
                 }
                 case "CCS" -> {
                     COO coo = matrixMultiplication.PrepareMultiplication(a,b);
-                    CompressedColMatrixBuilder compressedColMatrixBuilder = new CompressedColMatrixBuilder(coo.coordinates);
+                    CompressedColMatrixBuilder compressedColMatrixBuilder = new CompressedColMatrixBuilder(coo.getCoordinates());
                     CCS ccs = compressedColMatrixBuilder.getCSSMatrix();
-                    System.out.println("ColPointer: " + ccs.colPtr());
-                    System.out.println("Rows :" + ccs.rows());
-                    System.out.println("Values :" + ccs.values());
+                    System.out.println("ColPointer: " + ccs.getColPtr());
+                    System.out.println("Rows :" + ccs.getRows());
+                    System.out.println("Values :" + ccs.getValues());
                     System.out.println("If you are done with the matrix multiplication system, write 'exit' to finish the system");
                 }
                 case "exit" -> System.exit(0);

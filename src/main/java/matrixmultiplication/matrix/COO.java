@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class COO extends SparseMatrix{
-    public final List<Coordinate> coordinates;
+    private final List<Coordinate> coordinates;
 
     public COO(List<Coordinate> coordinates) {
         this.coordinates = coordinates;
     }
 
-    public List<Coordinate> coordinates(){
+    public List<Coordinate> getCoordinates(){
         return coordinates;
     }
 

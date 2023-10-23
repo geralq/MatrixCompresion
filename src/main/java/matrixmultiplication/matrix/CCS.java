@@ -15,15 +15,15 @@ public class CCS extends SparseMatrix{
         this.colPtr = colPtr;
     }
 
-    public List<Double> values() {
+    public List<Double> getValues() {
         return values;
     }
 
-    public List<Integer> rows() {
+    public List<Integer> getRows() {
         return rows;
     }
 
-    public List<Integer> colPtr() {
+    public List<Integer> getColPtr() {
         return colPtr;
     }
 

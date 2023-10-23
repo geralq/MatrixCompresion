@@ -16,15 +16,15 @@ public class CRS extends SparseMatrix{
         this.rowPtr = rowPtr;
     }
 
-    public List<Double> values() {
+    public List<Double> getValues() {
         return values;
     }
 
-    public List<Integer> columns() {
+    public List<Integer> getColumns() {
         return columns;
     }
 
-    public List<Integer> rowPtr() {
+    public List<Integer> getRowPtr() {
         return rowPtr;
     }
 
