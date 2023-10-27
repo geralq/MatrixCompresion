@@ -16,16 +16,16 @@ public class MatrixMultiplication {
         List<Coordinate> coordinateList = new ArrayList<>();
         for (int i = 0; i < a.size().get(1) ; i++) {
             for (int j = 0; j < b.size().get(1); j++) {
-                int ii = a.getRowPtr().get(i);
-                int iEnd = a.getRowPtr().get(i+1);
-                int jj = b.getColPtr().get(j);
-                int jEnd = b.getColPtr().get(j+1);
+                int ii = a.rowPtr().get(i);
+                int iEnd = a.rowPtr().get(i+1);
+                int jj = b.colPtr().get(j);
+                int jEnd = b.colPtr().get(j+1);
                 long s = 0;
                 while (ii < iEnd && jj < jEnd){
-                    int aa = a.getColumns().get(ii);
-                    int bb = b.getRows().get(jj);
+                    int aa = a.columns().get(ii);
+                    int bb = b.rows().get(jj);
                     if(aa == bb){
-                        s += (long) (a.getValues().get(ii) * b.getValues().get(jj));
+                        s += (long) (a.values().get(ii) * b.values().get(jj));
                         ii++;
                         jj++;
                     } else if (aa < bb) {
@@ -36,7 +36,7 @@ public class MatrixMultiplication {
                 if (s !=0) coordinateList.add(new Coordinate(i,j,s));
             }
         }
-        return new COO(coordinateList);
+        return new COO(coordinateList, a.size());
     }
 
 }

@@ -1,6 +1,7 @@
 package matrixmultiplication.matrixbuilders;
 
 import matrixmultiplication.MatrixBuilder;
+import matrixmultiplication.matrix.COO;
 import matrixmultiplication.matrix.Coordinate;
 
 import java.io.BufferedReader;
@@ -14,14 +15,16 @@ public class CooMatrixBuilder implements MatrixBuilder {
     public final String filePath;
     private final List<Coordinate> coordinates = new ArrayList<>();
 
+    private List<Integer> size;
+
 
     public CooMatrixBuilder(String filePath){
         this.filePath = filePath;
         compress();
     }
 
-    public List<Coordinate> getCooMatrix() {
-        return coordinates;
+    public COO getCooMatrix() {
+        return new COO(coordinates,size);
     }
 
     @Override
@@ -33,7 +36,7 @@ public class CooMatrixBuilder implements MatrixBuilder {
             throw new RuntimeException(e);
         }
 
-        avoidMetadata(reader);
+        size = extractSize(reader);
         String line;
 
         while (true) {
@@ -60,8 +63,9 @@ public class CooMatrixBuilder implements MatrixBuilder {
         }
     }
 
-    private void avoidMetadata(BufferedReader reader) {
+    private List<Integer> extractSize(BufferedReader reader) {
         String line;
+        List<Integer> size = new ArrayList<>();
 
         while (true) {
             try {
@@ -75,9 +79,12 @@ public class CooMatrixBuilder implements MatrixBuilder {
 
             String[] parts = line.trim().split("\\s+");
             if (parts.length >= 2) {
+                size.add(Integer.parseInt(parts[0]));
+                size.add(Integer.parseInt(parts[1]));
                 break;
             }
         }
+        return size;
     }
 }
 

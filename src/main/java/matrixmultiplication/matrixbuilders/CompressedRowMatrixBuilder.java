@@ -1,6 +1,7 @@
 package matrixmultiplication.matrixbuilders;
 
 import matrixmultiplication.MatrixBuilder;
+import matrixmultiplication.matrix.COO;
 import matrixmultiplication.matrix.CRS;
 import matrixmultiplication.matrix.Coordinate;
 
@@ -9,22 +10,23 @@ import java.util.Comparator;
 import java.util.List;
 
 public class CompressedRowMatrixBuilder implements MatrixBuilder {
-    private final List<Coordinate> coordinateList;
+    private final COO coo;
     private List<Double> values;
     private List<Integer> columns;
     private List<Integer> rowPtr;
 
-    public CompressedRowMatrixBuilder(List<Coordinate> coordinateList) {
-        this.coordinateList = coordinateList;
+    public CompressedRowMatrixBuilder(COO coo) {
+        this.coo = coo;
         compress();
     }
 
     public CRS getCRSMatrix(){
-        return new CRS(values,columns,rowPtr);
+        return new CRS(values,columns,rowPtr, coo.size());
     }
 
     @Override
     public void compress() {
+        List<Coordinate> coordinateList = coo.coordinates();
         Comparator<Coordinate> coordinateComparator = Comparator.comparingInt(Coordinate::i);
         coordinateList.sort(coordinateComparator);
 
@@ -50,4 +52,5 @@ public class CompressedRowMatrixBuilder implements MatrixBuilder {
         columns = columnList;
         rowPtr = rowPtrList;
     }
+
 }
