@@ -12,7 +12,7 @@ public class MatrixMultiplication {
     public MatrixMultiplication(){
     }
 
-    public COO PrepareMultiplication(CRS a, CCS b) {
+    public COO matrixMultiplication(CRS a, CCS b) {
         List<Coordinate> coordinateList = new ArrayList<>();
         for (int i = 0; i < a.size().get(1) ; i++) {
             for (int j = 0; j < b.size().get(1); j++) {

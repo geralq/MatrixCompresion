@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Controller {
-    private final String path = "C:\\Users\\gerar\\OneDrive\\Escritorio\\ULPGC\\BD\\1138_bus.mtx";
+    private final String path = "C:\\Users\\gerar\\OneDrive\\Escritorio\\ULPGC\\BD\\mc2depi.mtx";
     private final CooMatrixBuilder cooMatrixBuilder = new CooMatrixBuilder(path);
     private final COO coo = cooMatrixBuilder.getCooMatrix();
     private final CompressedRowMatrixBuilder compressedRowMatrixBuilder = new CompressedRowMatrixBuilder(coo);
@@ -20,7 +20,6 @@ public class Controller {
     }
 
     public void execute(){
-
         CRS a = compressedRowMatrixBuilder.getCRSMatrix();
         CCS b = compressedColMatrixBuilder.getCSSMatrix();
         MatrixMultiplication matrixMultiplication = new MatrixMultiplication();
@@ -31,7 +30,7 @@ public class Controller {
         System.out.println("Welcome to the matrix multiplication system.");
         System.out.println("Please write the format of the matrix multiplication result.");
         Scanner read = new Scanner(System.in);
-        COO coo = matrixMultiplication.PrepareMultiplication(a, b);
+        COO coo = matrixMultiplication.matrixMultiplication(a, b);
         while (true){
 
             String format = read.next();

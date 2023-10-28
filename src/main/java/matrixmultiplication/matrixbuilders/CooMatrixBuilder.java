@@ -17,7 +17,6 @@ public class CooMatrixBuilder implements MatrixBuilder {
 
     private List<Integer> size;
 
-
     public CooMatrixBuilder(String filePath){
         this.filePath = filePath;
         compress();
