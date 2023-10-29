@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Controller {
-    private final String path = "C:\\Users\\gerar\\OneDrive\\Escritorio\\ULPGC\\BD\\mc2depi.mtx";
+    private final String path = "Introduce the path to your mtx file";
     private final CooMatrixBuilder cooMatrixBuilder = new CooMatrixBuilder(path);
     private final COO coo = cooMatrixBuilder.getCooMatrix();
     private final CompressedRowMatrixBuilder compressedRowMatrixBuilder = new CompressedRowMatrixBuilder(coo);
@@ -27,10 +27,10 @@ public class Controller {
     }
 
     private void CLI(MatrixMultiplication matrixMultiplication, CRS a, CCS b) {
+        COO coo = matrixMultiplication.matrixMultiplication(a, b);
         System.out.println("Welcome to the matrix multiplication system.");
         System.out.println("Please write the format of the matrix multiplication result.");
         Scanner read = new Scanner(System.in);
-        COO coo = matrixMultiplication.matrixMultiplication(a, b);
         while (true){
 
             String format = read.next();
