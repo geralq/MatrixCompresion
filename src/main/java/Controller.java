@@ -42,7 +42,8 @@ public class Controller {
                     System.out.println("RowPointer :" + crs.rowPtr());
                     System.out.println("Columns :" + crs.columns());
                     System.out.println("Values :" + crs.values());
-                    System.out.println("If you are done with the matrix multiplication system, write 'exit' to finish the system");
+                    System.out.println("The result has been printed, you can try other matrix formats if you desired to.");
+                    System.out.println("Otherwise, if you are done with the matrix multiplication system, write 'exit' to end the process");
                 }
                 case "CCS" -> {
                     CompressedColMatrixBuilder compressedColMatrixBuilder = new CompressedColMatrixBuilder(coo);
@@ -50,7 +51,8 @@ public class Controller {
                     System.out.println("ColPointer :" + ccs.colPtr());
                     System.out.println("Rows :" + ccs.rows());
                     System.out.println("Values :" + ccs.values());
-                    System.out.println("If you are done with the matrix multiplication system, write 'exit' to finish the system");
+                    System.out.println("The result has been printed, you can try other matrix formats if you desired to.");
+                    System.out.println("Otherwise, if you are done with the matrix multiplication system, write 'exit' to end the process");
                 }
                 case "COO" -> {
                     List<Coordinate> coordinateList = coo.coordinates();
@@ -65,15 +67,15 @@ public class Controller {
                     System.out.println("Rows :" + row);
                     System.out.println("Cols :" + column);
                     System.out.println("Values :" + value);
-                    System.out.println("If you are done with the matrix multiplication system, write 'exit' to finish the system");
+                    System.out.println("The result has been printed, you can try other matrix formats if you desired to.");
+                    System.out.println("Otherwise, if you are done with the matrix multiplication system, write 'exit' to end the process");
                 }
                 case "exit" -> System.exit(0);
                 default -> {
                     System.out.println("Please write an available format for the matrix multiplication.");
-                    System.out.println("The available formats are: CRS or CSS.");
+                    System.out.println("The available formats are: CRS, CSS and COO.");
                 }
             }
-
         }
     }
 }
